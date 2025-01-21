@@ -9,7 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(ResultAnalyzer.class)
 public class MainTest {
@@ -33,10 +33,10 @@ public class MainTest {
         Grocery.addItems("lemon");
         Grocery.addItems("cherry,artichoke");
 
-        assertEquals(Grocery.groceryList.size(), 4);
-        assertEquals(Grocery.groceryList.contains("lemon"), true);
-        assertEquals(Grocery.groceryList.contains("cherry"), true);
-        assertEquals(Grocery.groceryList.contains("artichoke"), true);
+        assertEquals(4, Grocery.groceryList.size());
+        assertTrue(Grocery.groceryList.contains("lemon"));
+        assertTrue(Grocery.groceryList.contains("cherry"));
+        assertTrue(Grocery.groceryList.contains("artichoke"));
     }
 
     @DisplayName("addItems methodu aynı elemanları eklemiyor mu?")
@@ -47,7 +47,7 @@ public class MainTest {
         Grocery.addItems("cherry,artichoke");
         Grocery.addItems("cherry,potato");
 
-        assertEquals(Grocery.groceryList.size(), 4);
+        assertEquals(4, Grocery.groceryList.size());
     }
 
     @DisplayName("addItems methodu sonrasında liste sort ediliyor mu?")
@@ -58,7 +58,7 @@ public class MainTest {
         Grocery.addItems("cherry,artichoke");
         Grocery.addItems("cherry,potato");
 
-        assertEquals(Grocery.groceryList.get(0), "artichoke");
+        assertEquals("artichoke", Grocery.groceryList.get(0));
     }
 
     @DisplayName("removeItems methodu doğru çalışıyor mu mu?")
@@ -70,13 +70,13 @@ public class MainTest {
         Grocery.groceryList.add("banana");
 
         Grocery.removeItems("cherry");
-        assertEquals(Grocery.groceryList.size(), 3);
-        assertEquals(Grocery.groceryList.contains("cherry"), false);
+        assertEquals(3, Grocery.groceryList.size());
+        assertFalse(Grocery.groceryList.contains("cherry"));
 
         Grocery.removeItems("lemon,banana");
-        assertEquals(Grocery.groceryList.size(), 1);
-        assertEquals(Grocery.groceryList.contains("lemon"), false);
-        assertEquals(Grocery.groceryList.contains("banana"), false);
+        assertEquals(1, Grocery.groceryList.size());
+        assertEquals(false, Grocery.groceryList.contains("lemon"));
+        assertFalse(Grocery.groceryList.contains("banana"));
     }
 
 
@@ -88,7 +88,7 @@ public class MainTest {
         Grocery.addItems("cherry,artichoke");
         Grocery.addItems("cherry,potato");
 
-        assertEquals(Grocery.groceryList.get(0), "artichoke");
+        assertEquals("artichoke", Grocery.groceryList.get(0));
     }
 
     @DisplayName("checkItemsInList methodu doğru çalışıyor mu?")
@@ -107,14 +107,14 @@ public class MainTest {
         Grocery.groceryList.add("tomato");
         Grocery.groceryList.add("potato");
         Grocery.printSorted();
-        assertEquals(Grocery.groceryList.get(0), "potato");
+        assertEquals("potato", Grocery.groceryList.get(0));
     }
 
     @DisplayName("createNewContact methodu doğru çalışıyor mu?")
     @Test
     public void testCreateNewContact()  {
         mobilePhone.addNewContact(new Contact("Test", "12345678"));
-        assertEquals(mobilePhone.getMyContacts().size(),4);
+        assertEquals(4, mobilePhone.getMyContacts().size());
         assertEquals(mobilePhone.getMyContacts().get(3).getName(), "Test");
     }
 
@@ -126,7 +126,7 @@ public class MainTest {
         Contact updatedContact = new Contact("Test", "12345679");
 
         assertEquals(mobilePhone.updateContact(contact, updatedContact), true);
-        assertEquals(mobilePhone.getMyContacts().size(),4);
+        assertEquals(4, mobilePhone.getMyContacts().size());
     }
 
     @DisplayName("removeNewContact methodu doğru çalışıyor mu?")
@@ -135,8 +135,8 @@ public class MainTest {
         Contact contact = new Contact("Test", "12345678");
         mobilePhone.addNewContact(new Contact("Test", "12345678"));
 
-        assertEquals(mobilePhone.removeContact(contact), true);
-        assertEquals(mobilePhone.getMyContacts().size(),3);
+        assertTrue(mobilePhone.removeContact(contact));
+        assertEquals(3, mobilePhone.getMyContacts().size());
     }
 
     @DisplayName("findContact(Contact) methodu doğru çalışıyor mu?")
@@ -154,7 +154,7 @@ public class MainTest {
         Contact contact = new Contact("Test", "12345678");
         mobilePhone.addNewContact(new Contact("Test", "12345678"));
 
-        assertEquals(mobilePhone.findContact(contact.getName()), 3);
+        assertEquals(3, mobilePhone.findContact(contact.getName()));
     }
 
     @DisplayName("queryContact(String) methodu doğru çalışıyor mu?")
