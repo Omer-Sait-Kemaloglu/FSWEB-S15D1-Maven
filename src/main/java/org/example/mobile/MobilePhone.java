@@ -1,15 +1,14 @@
 package org.example.mobile;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MobilePhone {
-    private String myNumber;
-    private ArrayList<Contact> myContacts;
+    private final String myNumber;
+    private final ArrayList<Contact> myContacts;
 
-    public MobilePhone(String myNumber, List<Contact> contacts) {
+    public MobilePhone(String myNumber, ArrayList<Contact> contacts) {
         this.myNumber = myNumber;
-        this.myContacts = new ArrayList<>();
+        this.myContacts = new ArrayList<>(contacts);
     }
 
     public String getMyNumber() {
